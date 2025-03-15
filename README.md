@@ -24,16 +24,15 @@ This project is an **adaptive learning platform** that personalizes courses base
 ---
 
 ## 🛠 Technology Stack  
-**Frontend**: [Lovable-generated UI components] (React.js, TailwindCSS, or similar modern frameworks)  
+**Frontend**:  (React.js, TailwindCSS)  
 **Backend**: Node.js / Express.js (for handling user data and course personalization)  
 **Database**: PostgreSQL / MongoDB (to store user progress, test results, and course content)  
-**AI Integration**: (Optional) Machine learning models to improve adaptation accuracy  
+**AI Integration**: DeepSeekR1 Reasoning model to improve adaptation accuracy  
 
 ---
 
 ##  Future Enhancements  
 🔹 **AI-based learning insights & recommendations**  
-🔹 **Integration with external learning platforms** (e.g., Coursera, Khan Academy)  
 🔹 **Gamification elements** (badges, streaks, leaderboards)  
 
 ##  Contributing  
