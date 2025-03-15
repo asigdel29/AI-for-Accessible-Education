@@ -56,9 +56,6 @@ To have your work merged in, please ensure the following:
 
 ---
 
-Thank you for contributing to **AI for Accessible Education**! 🚀  
-
----
 This project is licensed under the MIT License.
 
 
