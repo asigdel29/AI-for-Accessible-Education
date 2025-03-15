@@ -15,12 +15,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <header className="py-4 px-6 md:px-8 border-b border-border">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <a href="/" className="text-xl font-semibold text-primary hover:opacity-80 transition-opacity">
-            EduVibe<span className="text-secondary">.</span>
+            Let's Study<span className="text-secondary">.</span>
           </a>
           <nav className="hidden md:flex items-center space-x-8">
             <a href="/" className="text-sm font-medium hover:text-primary transition-colors">Home</a>
             <a href="/dashboard" className="text-sm font-medium hover:text-primary transition-colors">My Learning</a>
-            <a href="#" className="text-sm font-medium hover:text-primary transition-colors">Help</a>
+            <a href="/help" className="text-sm font-medium hover:text-primary transition-colors">Help</a>
           </nav>
         </div>
       </header>
@@ -41,12 +41,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <footer className="py-8 px-6 md:px-8 border-t border-border">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} EduVibe. All rights reserved.
+            © {new Date().getFullYear()} Let's Study. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Terms</a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy</a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+            <a href="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Terms</a>
+            <a href="/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy</a>
+            <a href="/contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</a>
           </div>
         </div>
       </footer>
