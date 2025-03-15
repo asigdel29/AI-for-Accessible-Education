@@ -6,20 +6,20 @@ This project is an **adaptive learning platform** that personalizes courses base
 ---
 
 ##  Key Features  
-✅ **Topic Selection** – Users enter a specific topic they want to learn.  
-✅ **RAISEC Personality Test** – Determines the user’s learning style.  
-✅ **Personalized Course Generation** – Creates lesson plans, quizzes, and assessments tailored to the user’s personality.  
-✅ **Adaptive Learning System** – Modifies course structure based on assessment results.  
-✅ **Feedback & Progress Tracking** – Users can track progress and provide feedback upon course completion.  
+ **Topic Selection** – Users enter a specific topic they want to learn.  
+ **RAISEC Personality Test** – Determines the user’s learning style.  
+ **Personalized Course Generation** – Creates lesson plans, quizzes, and assessments tailored to the user’s personality.  
+ **Adaptive Learning System** – Modifies course structure based on assessment results.  
+ **Feedback & Progress Tracking** – Users can track progress and provide feedback upon course completion.  
 
 ---
 
 ##  User Flow  
-1️⃣ **Enter Learning Topic** → Users specify a subject they want to learn.  
-2️⃣ **Complete RAISEC Test** → A short test assesses personality-based learning preferences.  
-3️⃣ **Generate Personalized Course** → The platform creates a custom lesson plan with quizzes & assessments.  
-4️⃣ **Dynamic Course Adjustments** → The course adapts based on user performance in quizzes.  
-5️⃣ **Completion & Feedback** → Users receive a certificate and are prompted for feedback.  
+1️ **Enter Learning Topic** → Users specify a subject they want to learn.  
+2️ **Complete RAISEC Test** → A short test assesses personality-based learning preferences.  
+3️ **Generate Personalized Course** → The platform creates a custom lesson plan with quizzes & assessments.  
+4️ **Dynamic Course Adjustments** → The course adapts based on user performance in quizzes.  
+5️ **Completion & Feedback** → Users receive a certificate and are prompted for feedback.  
 
 ---
 
@@ -59,7 +59,6 @@ To have your work merged in, please ensure the following:
 Thank you for contributing to **AI for Accessible Education**! 🚀  
 
 ---
-📜 License
 This project is licensed under the MIT License.
 
 
