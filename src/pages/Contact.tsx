@@ -12,23 +12,23 @@ const Contact = () => {
   const teamMembers: TeamMember[] = [
     {
       name: "Anubhav Sigdel",
-      role: "Project Lead",
-      email: "anubhav@letsstudy.com"
+      role: "Team Member",
+      email: "asigdel@oswego.edu"
     },
     {
       name: "Ayusha Bhandari",
-      role: "UX/UI Designer",
-      email: "ayusha@letsstudy.com"
+      role: "Team Member",
+      email: "abhandar@oswego.edu"
     },
     {
       name: "Sakshyam Sarki",
-      role: "Full Stack Developer",
-      email: "sakshyam@letsstudy.com"
+      role: "Team Member",
+      email: "ssarki@oswego.edu"
     },
     {
       name: "Shrishtika Bajracharya",
-      role: "Machine Learning Engineer",
-      email: "shrishtika@letsstudy.com"
+      role: "Team Member",
+      email: "shrishtika.vajra@gmail.com"
     }
   ];
 
@@ -61,7 +61,7 @@ const Contact = () => {
           We'd love to hear your feedback, questions, or suggestions about Let's Study. Please reach out to us!
         </p>
         <p className="text-muted-foreground">
-          General inquiries: <a href="mailto:info@letsstudy.com" className="text-primary hover:underline">info@letsstudy.com</a>
+          General inquiries: <a href="mailto:asigdel@oswego.edu" className="text-primary hover:underline">asigdel@oswego.edu</a>
         </p>
       </div>
     </AnimatedContainer>
