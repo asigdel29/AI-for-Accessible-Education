@@ -1,9 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BookOpen, Brain, Sparkles } from 'lucide-react';
 import AnimatedContainer from '../components/AnimatedContainer';
-import PersonalityCard from '../components/PersonalityCard';
 import { motion } from 'framer-motion';
 
 const CourseGeneration = () => {
@@ -13,31 +11,12 @@ const CourseGeneration = () => {
   const [stage, setStage] = useState(0);
 
   const selectedTopic = localStorage.getItem('selectedTopic') || '';
-  const personalityScoresStr = localStorage.getItem('personalityScores');
-  const dominantType = localStorage.getItem('dominantType') || 'R';
-
-  const personalityDescriptions = {
-    R: 'You learn best through practical, hands-on activities. Your course includes interactive exercises and real-world applications.',
-    A: 'You thrive on creative expression and visualization. Your course includes creative projects and visual learning materials.',
-    I: 'You excel with analytical thinking and research. Your course includes in-depth analysis and problem-solving challenges.',
-    S: 'You learn best through collaboration and discussion. Your course includes group activities and communication exercises.',
-    E: 'You prefer leadership and persuasive activities. Your course includes decision-making scenarios and presentation opportunities.',
-    C: 'You excel with structured, organized approaches. Your course includes detailed instructions and sequential learning materials.'
-  };
-
-  const personalityScores = personalityScoresStr
-    ? JSON.parse(personalityScoresStr)
-    : { R: 0, A: 0, I: 0, S: 0, E: 0, C: 0 };
-
-  const formattedScores = Object.entries(personalityScores).map(([type, score]) => ({
-    type: type as 'R' | 'A' | 'I' | 'S' | 'E' | 'C',
-    score: score as number,
-    description: personalityDescriptions[type as keyof typeof personalityDescriptions]
-  }));
+  // Retrieve the user’s inputted answer from the questions.
+  const inputAnswer = localStorage.getItem('inputAnswer') || '';
 
   useEffect(() => {
-    // If no topic or personality data, redirect back
-    if (!selectedTopic || !personalityScoresStr) {
+    // If no topic or input answer, redirect back
+    if (!selectedTopic || !inputAnswer) {
       navigate('/');
       return;
     }
@@ -52,12 +31,11 @@ const CourseGeneration = () => {
         if (newProgress === 60) setStage(2);
         if (newProgress === 85) setStage(3);
         
-        // When complete, wait a moment and navigate
+        // When complete, create mock course data and navigate
         if (newProgress >= 100) {
           clearInterval(interval);
           setLoading(false);
           
-          // Create mock course data
           const modules = [
             {
               id: '1',
@@ -101,7 +79,7 @@ const CourseGeneration = () => {
     }, 50);
 
     return () => clearInterval(interval);
-  }, [selectedTopic, personalityScoresStr, navigate]);
+  }, [selectedTopic, inputAnswer, navigate]);
 
   const getStageText = () => {
     switch (stage) {
@@ -117,6 +95,11 @@ const CourseGeneration = () => {
         return 'Processing...';
     }
   };
+
+  // Generate the prompt using the user's input answer and the selected topic.
+  const prompt = `
+I want you to act as a ${inputAnswer} course instructor, giving a short, personalized introduction course that is 3 to 4 sentences long for a course on ${selectedTopic}. Include course name, a short description, and 3 bullet points highlighting what will be covered.
+`;
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-12 px-4">
@@ -166,13 +149,13 @@ const CourseGeneration = () => {
               Your Personalized Course is Ready!
             </h2>
             <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-              We've created a custom learning experience based on your preferences for {selectedTopic}.
+              We've created a custom learning experience based on your answers and preferences for {selectedTopic}.
             </p>
             
-            <PersonalityCard 
-              scores={formattedScores}
-              dominantType={dominantType}
-            />
+            {/* Display the generated prompt */}
+            <div className="bg-gray-100 p-4 rounded">
+              <pre className="text-left text-sm whitespace-pre-wrap">{prompt}</pre>
+            </div>
             
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
