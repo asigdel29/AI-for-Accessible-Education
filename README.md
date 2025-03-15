@@ -1,69 +1,65 @@
-# Welcome to your Lovable project
+#  AI for Accessible Education  
 
-## Project info
+##  Overview  
+This project is an **adaptive learning platform** that personalizes courses based on the user’s learning preferences and personality traits. The system utilizes the **RAISEC personality test** to generate customized lesson plans, quizzes, and assessments. As users progress, the course dynamically adjusts to their performance, ensuring an optimized learning experience.  
 
-**URL**: https://lovable.dev/projects/bb28fd0a-4441-427b-a0a7-a961923dc4b5
+---
 
-## How can I edit this code?
+##  Key Features  
+✅ **Topic Selection** – Users enter a specific topic they want to learn.  
+✅ **RAISEC Personality Test** – Determines the user’s learning style.  
+✅ **Personalized Course Generation** – Creates lesson plans, quizzes, and assessments tailored to the user’s personality.  
+✅ **Adaptive Learning System** – Modifies course structure based on assessment results.  
+✅ **Feedback & Progress Tracking** – Users can track progress and provide feedback upon course completion.  
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+##  User Flow  
+1️⃣ **Enter Learning Topic** → Users specify a subject they want to learn.  
+2️⃣ **Complete RAISEC Test** → A short test assesses personality-based learning preferences.  
+3️⃣ **Generate Personalized Course** → The platform creates a custom lesson plan with quizzes & assessments.  
+4️⃣ **Dynamic Course Adjustments** → The course adapts based on user performance in quizzes.  
+5️⃣ **Completion & Feedback** → Users receive a certificate and are prompted for feedback.  
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/bb28fd0a-4441-427b-a0a7-a961923dc4b5) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠 Technology Stack  
+**Frontend**: [Lovable-generated UI components] (React.js, TailwindCSS, or similar modern frameworks)  
+**Backend**: Node.js / Express.js (for handling user data and course personalization)  
+**Database**: PostgreSQL / MongoDB (to store user progress, test results, and course content)  
+**AI Integration**: (Optional) Machine learning models to improve adaptation accuracy  
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+##  Future Enhancements  
+🔹 **AI-based learning insights & recommendations**  
+🔹 **Integration with external learning platforms** (e.g., Coursera, Khan Academy)  
+🔹 **Gamification elements** (badges, streaks, leaderboards)  
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+##  Contributing  
 
-Follow these steps:
+Contributors are more than welcome to improve the project by creating a new issue to **report bugs, suggest new features, or make changes** to the source code by submitting a **pull request (PR)**.  
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+To have your work merged in, please ensure the following:  
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+###  Contribution Process  
+1. **Fork the Repository** (if you are not a contributor) and create your branch from `master`.  
+   - If you are already a contributor, create a new **development branch** with a relevant name.  
+2. **Push your commits** to the aforementioned fork/branch.  
+3. **Keep changes within scope** – Avoid committing irrelevant changes that are unrelated to the PR.  
+4. **Create a Pull Request (PR)** in the main repository.  
+5. **Describe Your Changes** – If you've fixed a bug or added a new feature, provide a **clear and comprehensive list of changes** in your PR description.  
+6. **Ensure Code Quality** – Make sure your code is:  
+   - **Tested** and fully functional.  
+   - **Linted** and follows clean coding practices.  
+7. **Merging into Master** – When merging into `master`, it is highly recommended to use **"Squash and Merge"** instead of "Create a Merge Commit" to prevent cluttering the commit history.  
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Thank you for contributing to **AI for Accessible Education**! 🚀  
 
-**Edit a file directly in GitHub**
+---
+📜 License
+This project is licensed under the MIT License.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/bb28fd0a-4441-427b-a0a7-a961923dc4b5) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
