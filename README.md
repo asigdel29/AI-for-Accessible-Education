@@ -22,15 +22,33 @@ This project is an **adaptive learning platform** that personalizes courses base
 
 ---
 
-##  Technology Stack  
-- **Frontend**: React.js, TailwindCSS  
-- **Backend**: GoLang  
-- **Database**: MongoDB  
-- **AI Integration**: Llama Reasoning Model, trained using a dataset derived from various educational and psychological assessments.  #Pending
+## Technology Stack
+
+- **Frontend**: React.js, TailwindCSS
+- **Backend**: GoLang
+- **Database**: MongoDB
+- **Authentication**: Google OAuth
+- **CI/CD & Deployment**: Vercel
+- **Version Control**: GitHub
 
 ---
 
-## Future Enhancements  
+## AI Integration
+
+The AI model is **locally hosted** and trained on the following datasets:
+
+- **LectureBank**: A corpus for NLP Education and Prerequisite Chain Learning.
+- **Open University Learning Analytics Dataset (OULAD)**: Provides valuable insights into learning patterns and user engagement.
+
+The following tasks were to enhance the model
+- **Enhancing Training Data with Personality Metadata**: Integrating personality traits to personalize learning pathways.
+- **Fine-Tuning the Model**: Refining the model's abilities by adjusting it for specific tasks or domains.
+- **Implementing Dynamic Course Adaptation**: Using assessment feedback to adjust course material in real time, ensuring a personalized and adaptive learning experience.
+
+*[Google Colab link for training mode](https://colab.research.google.com/drive/1dbOKwKIJGd1OANHxSr6IiORZ459Ju__5?usp=sharing)*
+
+The model is currently optimized for **Natural Language Processing (NLP)** and **Chain Learning**. To enhance its course generation, additional datasets are required. The next steps for the model include:
+
 - **AI-based recommendations**  
 - **Gamification** (badges, leaderboards)
 
@@ -41,7 +59,7 @@ Feel free to contribute by reporting bugs, suggesting features, or submitting pu
 
 ---
 
-This project was created during the **Devpost MEGA Hackathon (48 hours)** as part of our team submission.  
+This project was created during the *[Devpost MEGA Hackathon](https://mega-hackathon-2025.devpost.com/)* as part of our team submission.  
 
 **Team Members**:  
 - Anubhav Sigdel  
