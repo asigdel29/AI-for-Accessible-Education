@@ -8,21 +8,21 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func (s *service) GetRIASEC(id int) (*models.Riasec, error) {
-	collection := s.db.Database(database).Collection("riasec")
+func (s *service) GetLesson(id int) (*models.Lesson, error) {
+	collection := s.db.Database(database).Collection("lesson")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	var riasec models.Riasec
-	err := collection.FindOne(ctx, bson.M{"riasecid": id}).Decode(&riasec)
+	var lesson models.Lesson
+	err := collection.FindOne(ctx, bson.M{"lessonid": id}).Decode(&lesson)
 	if err != nil {
 		return nil, err
 	}
-	return &riasec, nil
+	return &lesson, nil
 }
 
-func (s *service) SetRIASEC(riasec *models.Riasec) error {
-	collection := s.db.Database(database).Collection("riasec")
+func (s *service) SetLesson(riasec *models.Lesson) error {
+	collection := s.db.Database(database).Collection("lesson")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 

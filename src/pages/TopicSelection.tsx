@@ -6,6 +6,7 @@ import AnimatedContainer from '../components/AnimatedContainer';
 import SearchInput from '../components/SearchInput';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
+import Badge from "@/components/Badges.tsx";
 
 const suggestedTopics = [
   'Machine Learning Basics',
@@ -38,9 +39,16 @@ const TopicSelection = () => {
     navigate('/personality-test');
   };
 
+  // const handleSelectSuggestion = (suggestion: string) => {
+  //   setTopic(suggestion);
+  // };
+
   const handleSelectSuggestion = (suggestion: string) => {
     setTopic(suggestion);
+    localStorage.setItem('selectedTopic', suggestion);
+    navigate('/personality-test');
   };
+
 
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center py-12 px-4">

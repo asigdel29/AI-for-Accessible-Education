@@ -16,16 +16,20 @@ import (
 
 type Service interface {
 	Health() map[string]string
-	GetAssessment(id string) (*models.Assessment, error)
+	GetAssessment(id int) (*models.Assessment, error)
 	SetAssessment(assessment *models.Assessment) error
+	GetLesson(id int) (*models.Lesson, error)
+	SetLesson(lesson *models.Lesson) error
 	GetCourse(id int) (*models.Course, error)
 	SetCourse(course *models.Course) error
-	GetRIASEC(id int) (*models.RIASEC, error)
-	SetRIASEC(riasec *models.RIASEC) error
+	GetRIASEC(id int) (*models.Riasec, error)
+	SetRIASEC(riasec *models.Riasec) error
+	GetFeedback(id int) (*models.Feedback, error)
+	SetFeedback(feedback *models.Feedback) error
 	GetTopic(id int) (*models.Topic, error)
 	SetTopic(topic *models.Topic) error
-	GetUserProgress(userid int) (*models.UserProgress, error)
-	SetUserProgress(progress *models.UserProgress) error
+	GetUserProgress(userid int) (*models.Userprogress, error)
+	SetUserProgress(progress *models.Userprogress) error
 }
 
 type service struct {
