@@ -57,26 +57,11 @@ func (s *Server) RegisterRoutes() http.Handler {
 	userProgress := s.progressHandler()
 	r.Mount("/progress", userProgress)
 
-	//r.Use(RequestCorsMiddleware(r))
-	//r.UseProviders(auth.NewAuth())
 	r.Get("/auth/{provider}/callback", s.CallbackHandler)
 
 	r.Get("/health", s.healthHandler)
 
 	r.Get("/home", func(writer http.ResponseWriter, request *http.Request) {
-		//writer.WriteHeader(http.StatusOK)
-		//writer.Write()
-		//resp, err := http.Get("https://www.googleapis.com/gmail/v1/users/me/messages")
-		//if err != nil {
-		//	writer.WriteHeader(http.StatusInternalServerError)
-		//}
-		//defer resp.Body.Close()
-		//body, err := ioutil.ReadAll(resp.Body)
-		//if err != nil {
-		//	writer.WriteHeader(http.StatusInternalServerError)
-		//}
-		//fmt.Fprint(writer, string(body))
-
 	})
 
 	r.Get("/auth/{provider}", func(w http.ResponseWriter, r *http.Request) {
@@ -91,48 +76,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 			http.Redirect(w, r, "http://localhost:8080/home", http.StatusTemporaryRedirect)
 		}
 		gothic.BeginAuthHandler(w, r)
-		//provider := c.Param("provider")
-		//if provider == "" {
-		//	errors.New("provider is required")
-		//	return
-		//}
-		//q := c.Request.URL.Query()
-		//q.Add("provider", provider)
-		//c.Request.URL.RawQuery = q.Encode()
-		//if gothUser, err := gothic.CompleteUserAuth(c.Writer, c.Request); err == nil {
-		//	c.JSON(http.StatusOK, gothUser)
-		//	return
-		//} else {
-		//	gothic.BeginAuthHandler(c.Writer, c.Request)
-		//}
-
 	})
-
-	//r.Get("/emails", func(w http.ResponseWriter, r *http.Request) {
-	//	provider := chi.URLParam(r, "provider")
-	//	q := r.URL.Query()
-	//	q.Add("provider", provider)
-	//	r.URL.RawQuery = q.Encode()
-	//	//gothic.StoreInSession("provider", provider, r, w)
-	//	gothic.GetContextWithProvider(r, provider)
-	//	if gothUser, err := gothic.CompleteUserAuth(w, r); err == nil {
-	//		fmt.Println(gothUser)
-	//		http.Redirect(w, r, "http://localhost:8080/home", http.StatusTemporaryRedirect)
-	//	}
-	//	gothic.BeginAuthHandler(w, r)
-	//})
-	//
-	//// r.Get("/auth/{provider}", s.)
-	//
-	//// r.GET("/auth/:provider", func(c *gin.Context) {
-	//// 	provider := c.Param("provider")
-	//// 	if provider == "" {
-	//// 		c.JSON(http.StatusBadRequest, gin.H{"error": "Provider is required"})
-	//// 		return
-	//// 	}
-	//
-	//// 	gothic.BeginAuthHandler(c.Writer, c.Request)
-	//// })
 
 	r.Get("/logout", func(w http.ResponseWriter, r *http.Request) {
 		// enableCORS(w, r)
@@ -148,10 +92,6 @@ func (s *Server) RegisterRoutes() http.Handler {
 		msg := map[string]string{"msg": "successfully logged out"}
 		json.NewEncoder(w).Encode(msg)
 	})
-
-	//r.Get("/getemails", func(w http.ResponseWriter, r *http.Request) {
-	//	// enableCORS(w, r)
-	//})
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Received request to /") // Add debug logging
@@ -174,31 +114,10 @@ func (s *Server) RegisterRoutes() http.Handler {
 		fmt.Println(cookie)
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(cookie.Values["user"].(string)))
-
-		//session, _ := auth.Store.Get(r, "session")
-
-		// Check if "user" exists in session
-		//user, ok := session.Values["user"].(*models.User) // Change *User to your actual user struct
-		//if !ok || user == nil {
-		//	http.Error(w, "Unauthorized", http.StatusUnauthorized)
-		//	return
-		//}
-
-		// Return user data as JSON
-		//w.Header().Set("Content-Type", "application/json")
-		//json.NewEncoder(w).Encode(user)
 	})
 
 	return r
 }
-
-//func (s *Server) HelloWorldHandler(c *gin.Context) {
-//	fmt.Println("Processing HelloWorldHandler") // Add debug logging
-//	resp := make(map[string]string)
-//	resp["message"] = "Hello World"
-//
-//	c.JSON(http.StatusOK, resp)
-//}
 
 func (s *Server) healthHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
@@ -232,26 +151,9 @@ func (s *Server) CallbackHandler(w http.ResponseWriter, r *http.Request) {
 	if err := session.Save(r, w); err != nil {
 		fmt.Println("Error saving session:", err)
 	}
-	//http.SetCookie(w, &http.Cookie{
-	//	Name:  "user",
-	//	Value: session,
-	//})
-	http.Redirect(w, r, "http://localhost:8081/", http.StatusFound)
-	//state := chi.URLParam(r, "state")
-	//fmt.Println(user)
-
-	//fmt.Printf("AccessToken: %s", user.AccessToken)
-	//fmt.Printf("RefreshToken: %s", user.RefreshToken)
-	//emails, err := getEmails(&user)
-	//if err != nil {
-	//	fmt.Println(err)
-	//}
-	//w.Header().Set("Content-Type", "application/json")
-	//json.NewEncoder(w).Encode(emails)
-	//http.Redirect(w, r, "http://localhost:8080/home", http.StatusFound)
-	//store := sessions.NewCookieStore([]byte("secret"))
-	//sessions.NewSession(store, "jwt")
+	http.Redirect(w, r, "http://localhost:8000/", http.StatusFound)
 }
+<<<<<<< HEAD
 
 //func getEmailService(accessToken string) (*gmail.Service, error) {
 //	client := &http.Client{}
@@ -300,3 +202,5 @@ func (s *Server) CallbackHandler(w http.ResponseWriter, r *http.Request) {
 //	return "", err
 //}
 >>>>>>> 30e7cd5 (worked on assessmentdb, coursedb, database, feedbackdb, lessondb, riasecdb, routes, server, toopicdb, userprogressdb)
+=======
+>>>>>>> c8e4ac7 (google oauth worked)
