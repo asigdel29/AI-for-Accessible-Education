@@ -47,8 +47,6 @@ const TopicSelection = () => {
     setTopic(suggestion);
   };
 
-  // Chatbot functions
-  // Replace this function with your real AI model call.
   const callAIModel = async (conversation) => {
     try {
       const response = await fetch('/api/chat', {
