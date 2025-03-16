@@ -9,7 +9,11 @@ import (
 )
 
 func (s *service) GetFeedback(id int) (*models.Feedback, error) {
+<<<<<<< HEAD
 	collection := s.db.Database(database).Collection("Feedback")
+=======
+	collection := s.db.Database(database).Collection("feedback")
+>>>>>>> a2f439a (working on crud)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
@@ -22,7 +26,11 @@ func (s *service) GetFeedback(id int) (*models.Feedback, error) {
 }
 
 func (s *service) SetFeedback(riasec *models.Feedback) error {
+<<<<<<< HEAD
 	collection := s.db.Database(database).Collection("Feedback")
+=======
+	collection := s.db.Database(database).Collection("feedback")
+>>>>>>> a2f439a (working on crud)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 

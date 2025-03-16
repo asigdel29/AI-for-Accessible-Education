@@ -9,7 +9,11 @@ import (
 )
 
 func (s *service) GetLesson(id int) (*models.Lesson, error) {
+<<<<<<< HEAD
 	collection := s.db.Database(database).Collection("Lesson")
+=======
+	collection := s.db.Database(database).Collection("lesson")
+>>>>>>> a2f439a (working on crud)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
@@ -22,7 +26,11 @@ func (s *service) GetLesson(id int) (*models.Lesson, error) {
 }
 
 func (s *service) SetLesson(riasec *models.Lesson) error {
+<<<<<<< HEAD
 	collection := s.db.Database(database).Collection("Lesson")
+=======
+	collection := s.db.Database(database).Collection("lesson")
+>>>>>>> a2f439a (working on crud)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
