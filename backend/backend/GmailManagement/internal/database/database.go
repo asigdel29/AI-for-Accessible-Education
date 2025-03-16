@@ -15,6 +15,8 @@ import (
 
 type Service interface {
 	Health() map[string]string
+	GetUser(id string) (*models.User, error)
+	SetUser(user *models.User) error
 	GetAssessment(id int) (*models.Assessment, error)
 	SetAssessment(assessment *models.Assessment) error
 	GetLesson(id int) (*models.Lesson, error)

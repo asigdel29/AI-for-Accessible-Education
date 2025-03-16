@@ -3,8 +3,12 @@ package server
 import (
 	"GmailManagement/internal/auth"
 	"GmailManagement/internal/models"
+	"crypto/rand"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/golang-jwt/jwt/v5"
+	"os"
 	"time"
 
 	"github.com/gorilla/sessions"
@@ -141,13 +145,51 @@ func (s *Server) CallbackHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	u := models.User{ID: user.UserID, GoogleID: user.UserID, Email: user.Email, Name: user.Name, FamilyName: user.LastName, ProfilePicture: user.AvatarURL, AccessToken: user.AccessToken, RefreshToken: user.RefreshToken, TokenExpiry: user.ExpiresAt, CreatedAt: time.Now(), UpdatedAt: time.Now()}
+
+	//generate session id
+	sessionid, err := generateSessionid()
+	if err != nil {
+		http.Error(w, "Failed to generate session ID: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	u := models.User{ID: sessionid, GoogleID: user.UserID, Email: user.Email, Name: user.Name, FamilyName: user.LastName, ProfilePicture: user.AvatarURL, AccessToken: user.AccessToken, RefreshToken: user.RefreshToken, TokenExpiry: user.ExpiresAt, CreatedAt: time.Now(), UpdatedAt: time.Now()}
+	err = s.db.SetUser(&u)
+	if err != nil {
+		return
+	}
+	jwtstring, err := createToken(sessionid)
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	//create a cookie sessionls
 	session, _ := auth.Store.Get(r, "session")
-	session.Values["user"] = u.ID // need to set path to the frontend
+	session.Values["sessionId"] = jwtstring // need to set path to the frontend
 	if err := session.Save(r, w); err != nil {
 		fmt.Println("Error saving session:", err)
 	}
 	http.Redirect(w, r, "http://localhost:8000/", http.StatusFound)
+}
+
+func generateSessionid() (string, error) {
+	b := make([]byte, 32)
+	_, err := rand.Read(b)
+	if err != nil {
+		return "", err
+	}
+	return base64.URLEncoding.EncodeToString(b), nil
+}
+
+func createToken(username string) (string, error) {
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256,
+		jwt.MapClaims{
+			"sessionId": username,
+			"exp":       time.Now().Add(time.Hour * 24).Unix(),
+		})
+	tokenString, err := token.SignedString(os.Getenv("UID_SECRET"))
+	if err != nil {
+		return "", err
+	}
+
+	return tokenString, nil
 }
