@@ -4,6 +4,7 @@ import (
 	"GmailManagement/internal/models"
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/go-chi/chi/v5"
@@ -11,14 +12,17 @@ import (
 
 func (s *Server) assessment() http.Handler {
 	r := chi.NewRouter()
-	r.Get("/assessment/{id}", s.getAssessment)
-	r.Post("/assessment", s.setAssessment)
+	r.Get("/{id}", s.getAssessment)
+	r.Post("/", s.setAssessment)
 	return r
 }
 
 func (s *Server) getAssessment(w http.ResponseWriter, r *http.Request) {
-	id := chi.URLParam(r, "id")
-
+	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	if err != nil {
+		http.Error(w, "invalid id", http.StatusBadRequest)
+		return
+	}
 	assessment, err := s.db.GetAssessment(id)
 	// assessment, err := s.db.
 	if err != nil {

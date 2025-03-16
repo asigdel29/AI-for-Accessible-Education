@@ -4,6 +4,7 @@ import (
 	"GmailManagement/internal/models"
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/go-chi/chi/v5"
@@ -17,8 +18,11 @@ func (s *Server) courseHandler() http.Handler {
 }
 
 func (s *Server) getCourse(w http.ResponseWriter, r *http.Request) {
-	id := chi.URLParam(r, "id")
-
+	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	if err != nil {
+		http.Error(w, "invalid id", http.StatusBadRequest)
+		return
+	}
 	course, err := s.db.GetCourse(id)
 	// assessment, err := s.db.
 	if err != nil {

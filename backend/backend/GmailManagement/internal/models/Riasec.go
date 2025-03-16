@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type riasec struct {
+type Riasec struct {
 	Testid       int       `json:"testid"`
 	Userid       int       `json:"userid"`
 	Realistic    int       `json:"realistic"`

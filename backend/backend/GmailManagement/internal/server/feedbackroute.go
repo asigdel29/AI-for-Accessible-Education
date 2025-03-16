@@ -4,6 +4,7 @@ import (
 	"GmailManagement/internal/models"
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/go-chi/chi/v5"
@@ -17,9 +18,8 @@ func (s *Server) feedbackHandler() http.Handler {
 }
 
 func (s *Server) getFeedback(w http.ResponseWriter, r *http.Request) {
-	id := chi.URLParam(r, "id")
-
-	feedback, err := s.db.getFeedback(id)
+	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	feedback, err := s.db.GetFeedback(id)
 	// assessment, err := s.db.
 	if err != nil {
 		http.Error(w, "Feedback not found", http.StatusNotFound)
@@ -39,7 +39,7 @@ func (s *Server) setFeedback(w http.ResponseWriter, r *http.Request) {
 
 	feedback.CreatedAt = time.Now()
 
-	if err := s.db.Setfeedback(&feedback); err != nil {
+	if err := s.db.SetFeedback(&feedback); err != nil {
 		http.Error(w, "Failed to save feedback", http.StatusInternalServerError)
 		return
 	}
