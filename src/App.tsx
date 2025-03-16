@@ -1,10 +1,11 @@
-
+import { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import SplashScreen from "./components/SplashScreen";
 import TopicSelection from "./pages/TopicSelection";
 import PersonalityTest from "./pages/PersonalityTest";
 import CourseGeneration from "./pages/CourseGeneration";
@@ -20,32 +21,46 @@ import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<TopicSelection />} />
-            <Route path="/index" element={<Index />} />
-            <Route path="/personality-test" element={<PersonalityTest />} />
-            <Route path="/course-generation" element={<CourseGeneration />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/module/:moduleId" element={<ModulePage />} />
-            <Route path="/course-complete" element={<CourseComplete />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/help" element={<Help />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+const App = () => {
+  const [showSplash, setShowSplash] = useState(() => {
+    return !sessionStorage.getItem("hasSeenSplash");
+  });
 
-);
+  useEffect(() => {
+    if (showSplash) {
+      sessionStorage.setItem("hasSeenSplash", "true");
+    }
+  }, [showSplash]);
+
+  return showSplash ? (
+      <SplashScreen onComplete={() => setShowSplash(false)} />
+  ) : (
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<TopicSelection />} />
+                <Route path="/index" element={<Index />} />
+                <Route path="/personality-test" element={<PersonalityTest />} />
+                <Route path="/course-generation" element={<CourseGeneration />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/module/:moduleId" element={<ModulePage />} />
+                <Route path="/course-complete" element={<CourseComplete />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/help" element={<Help />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+  );
+};
 
 export default App;
+
