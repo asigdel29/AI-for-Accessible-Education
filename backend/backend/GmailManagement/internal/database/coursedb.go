@@ -11,7 +11,7 @@ import (
 )
 
 func (s *service) GetCourse(id int) (*models.Course, error) {
-	collection := s.db.Database(database).Collection("course")
+	collection := s.db.Database(database).Collection("Course")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
@@ -24,7 +24,7 @@ func (s *service) GetCourse(id int) (*models.Course, error) {
 }
 
 func (s *service) SetCourse(course *models.Course) error {
-	collection := s.db.Database(database).Collection("course")
+	collection := s.db.Database(database).Collection("Course")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 

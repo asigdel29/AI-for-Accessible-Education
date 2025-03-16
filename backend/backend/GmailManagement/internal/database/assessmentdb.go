@@ -11,8 +11,8 @@ import (
 )
 
 func (s *service) GetAssessment(id int) (*models.Assessment, error) {
-	collection := s.db.Database(database).Collection("assessment")
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	collection := s.db.Database("LetsStudy").Collection("Assessment")
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
 	var assessment models.Assessment
@@ -24,7 +24,7 @@ func (s *service) GetAssessment(id int) (*models.Assessment, error) {
 }
 
 func (s *service) SetAssessment(assessment *models.Assessment) error {
-	collection := s.db.Database(database).Collection("assessment")
+	collection := s.db.Database(database).Collection("Assessment")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 

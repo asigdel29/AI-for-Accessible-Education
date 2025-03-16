@@ -11,7 +11,7 @@ import (
 )
 
 func (s *service) GetTopic(id int) (*models.Topic, error) {
-	collection := s.db.Database(database).Collection("topic")
+	collection := s.db.Database(database).Collection("Topic")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
@@ -24,7 +24,7 @@ func (s *service) GetTopic(id int) (*models.Topic, error) {
 }
 
 func (s *service) SetTopic(topic *models.Topic) error {
-	collection := s.db.Database(database).Collection("topic")
+	collection := s.db.Database(database).Collection("Topic")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
