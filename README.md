@@ -40,7 +40,7 @@ The AI model, **Meta-Llama-3.1-8B-bnb-4bit**, is **locally hosted** and trained 
 - **LectureBank**: A corpus for NLP Education and Prerequisite Chain Learning.
 - **Open University Learning Analytics Dataset (OULAD)**: Provides valuable insights into learning patterns and user engagement.
 
-The following tasks were to enhance the model
+The following tasks were performed to enhance the model
 - **Enhancing Training Data with Personality Metadata**: Integrating personality traits to personalize learning pathways.
 - **Fine-Tuning the Model**: Refining the model's abilities by adjusting it for specific tasks or domains.
 - **Implementing Dynamic Course Adaptation**: Using assessment feedback to adjust course material in real time, ensuring a personalized and adaptive learning experience.
