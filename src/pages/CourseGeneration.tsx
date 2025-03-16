@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Brain, Sparkles } from 'lucide-react';
 import AnimatedContainer from '../components/AnimatedContainer';
 import { motion } from 'framer-motion';
-import { generateCourse, adaptCourse } from '/home/asigdel/AI-for-Accessible-Education/model.js';
+import { generateCourse, adaptCourse } from '../../model.js';
 
 const CourseGeneration = () => {
   const navigate = useNavigate();
