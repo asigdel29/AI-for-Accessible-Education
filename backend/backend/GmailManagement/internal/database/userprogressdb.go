@@ -9,12 +9,12 @@ import (
 )
 
 func (s *service) GetUserProgress(userid int) (*models.Userprogress, error) {
-	collection := s.db.Database(database).Collection("userprogress")
+	collection := s.db.Database(database).Collection("Userprogress")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	var progress models.Userprogress
-	err := collection.FindOne(ctx, bson.M{"userprogressid": userid}).Decode(&progress)
+	err := collection.FindOne(ctx, bson.M{"progressid": userid}).Decode(&progress)
 	if err != nil {
 		return nil, err
 	}
@@ -22,7 +22,7 @@ func (s *service) GetUserProgress(userid int) (*models.Userprogress, error) {
 }
 
 func (s *service) SetUserProgress(progress *models.Userprogress) error {
-	collection := s.db.Database(database).Collection("userprogress")
+	collection := s.db.Database(database).Collection("Userprogress")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 

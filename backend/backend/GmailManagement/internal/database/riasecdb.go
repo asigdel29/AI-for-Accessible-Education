@@ -9,12 +9,12 @@ import (
 )
 
 func (s *service) GetRIASEC(id int) (*models.Riasec, error) {
-	collection := s.db.Database(database).Collection("riasec")
+	collection := s.db.Database(database).Collection("Riasec")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	var riasec models.Riasec
-	err := collection.FindOne(ctx, bson.M{"riasecid": id}).Decode(&riasec)
+	err := collection.FindOne(ctx, bson.M{"testid": id}).Decode(&riasec)
 	if err != nil {
 		return nil, err
 	}
@@ -22,7 +22,7 @@ func (s *service) GetRIASEC(id int) (*models.Riasec, error) {
 }
 
 func (s *service) SetRIASEC(riasec *models.Riasec) error {
-	collection := s.db.Database(database).Collection("riasec")
+	collection := s.db.Database(database).Collection("Riasec")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
