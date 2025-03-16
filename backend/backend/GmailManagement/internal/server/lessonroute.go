@@ -4,6 +4,7 @@ import (
 	"GmailManagement/internal/models"
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/go-chi/chi/v5"
@@ -17,9 +18,8 @@ func (s *Server) lessonHandler() http.Handler {
 }
 
 func (s *Server) getLesson(w http.ResponseWriter, r *http.Request) {
-	id := chi.URLParam(r, "id")
-
-	lesson, err := s.db.getLesson(id)
+	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	lesson, err := s.db.GetLesson(id)
 	// assessment, err := s.db.
 	if err != nil {
 		http.Error(w, "lesson not found", http.StatusNotFound)
@@ -30,7 +30,7 @@ func (s *Server) getLesson(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(lesson)
 }
 
-func (s *Server) setlesson(w http.ResponseWriter, r *http.Request) {
+func (s *Server) setLesson(w http.ResponseWriter, r *http.Request) {
 	var lesson models.Lesson
 	if err := json.NewDecoder(r.Body).Decode(&lesson); err != nil {
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
@@ -39,7 +39,7 @@ func (s *Server) setlesson(w http.ResponseWriter, r *http.Request) {
 
 	lesson.CreatedAt = time.Now()
 
-	if err := s.db.setLesson(&lesson); err != nil {
+	if err := s.db.SetLesson(&lesson); err != nil {
 		http.Error(w, "Failed to save lesson", http.StatusInternalServerError)
 		return
 	}

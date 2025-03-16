@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type topic struct {
+type Topic struct {
 	Topicid     int       `json:"topicid"`
 	Topicname   string    `json:"topicname"`
 	Description string    `json:"description"`

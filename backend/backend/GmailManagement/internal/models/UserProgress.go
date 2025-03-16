@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type userprogress struct {
+type Userprogress struct {
 	Progressid  int       `json:"progressid"`
 	Userid      int       `json:"userid"`
 	Lessonid    int       `json:"lessonid"`

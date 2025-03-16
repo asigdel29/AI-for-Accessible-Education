@@ -8,8 +8,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func (s *service) GetAssessment(id string) (*models.Assessment, error) {
-	collection := s.db.Database(database).Collection("assessments")
+func (s *service) GetAssessment(id int) (*models.Assessment, error) {
+	collection := s.db.Database(database).Collection("assessment")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
@@ -22,7 +22,7 @@ func (s *service) GetAssessment(id string) (*models.Assessment, error) {
 }
 
 func (s *service) SetAssessment(assessment *models.Assessment) error {
-	collection := s.db.Database(database).Collection("assessments")
+	collection := s.db.Database(database).Collection("assessment")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 

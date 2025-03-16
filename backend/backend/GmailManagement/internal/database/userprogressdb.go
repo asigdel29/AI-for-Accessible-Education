@@ -8,20 +8,20 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func (s *service) GetUserProgress(userid int) (*models.UserProgress, error) {
+func (s *service) GetUserProgress(userid int) (*models.Userprogress, error) {
 	collection := s.db.Database(database).Collection("userprogress")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	var progress models.UserProgress
-	err := collection.FindOne(ctx, bson.M{"userid": userid}).Decode(&progress)
+	var progress models.Userprogress
+	err := collection.FindOne(ctx, bson.M{"userprogressid": userid}).Decode(&progress)
 	if err != nil {
 		return nil, err
 	}
 	return &progress, nil
 }
 
-func (s *service) SetUserProgress(progress *models.UserProgress) error {
+func (s *service) SetUserProgress(progress *models.Userprogress) error {
 	collection := s.db.Database(database).Collection("userprogress")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
