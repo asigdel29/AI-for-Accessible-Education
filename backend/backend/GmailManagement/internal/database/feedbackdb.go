@@ -9,7 +9,7 @@ import (
 )
 
 func (s *service) GetFeedback(id int) (*models.Feedback, error) {
-	collection := s.db.Database(database).Collection("feedback")
+	collection := s.db.Database(database).Collection("Feedback")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
@@ -22,7 +22,7 @@ func (s *service) GetFeedback(id int) (*models.Feedback, error) {
 }
 
 func (s *service) SetFeedback(riasec *models.Feedback) error {
-	collection := s.db.Database(database).Collection("feedback")
+	collection := s.db.Database(database).Collection("Feedback")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
