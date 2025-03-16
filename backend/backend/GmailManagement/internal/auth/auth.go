@@ -17,7 +17,7 @@ const (
 	MaxAge = 86400 // 1 day
 	IsProd = false // for local use, use true for production
 	// Update callback URL to point to your Vite frontend
-	callbackURL = "http://localhost:8080/auth/google/callback" // Base frontend URL
+	callbackURL = "http://localhost:8000/auth/google/callback" // Base frontend URL
 )
 
 var Store = sessions.NewCookieStore([]byte(os.Getenv("SESSION_SECRET")))
