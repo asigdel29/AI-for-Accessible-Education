@@ -20,7 +20,7 @@ const questions: Question[] = [
   },
   {
     id: '2',
-    text: "Solve This Quick Puzzle! (Personality & Problem-Solving)",
+    text: "Solve This Quick Puzzle!",
     options: [
       { id: '2-1', text: "🔢 A logical number sequence", value: "Analytical Thinker" },
       { id: '2-2', text: "🎨 A color pattern matching game", value: "Creative Thinker" },
@@ -37,7 +37,7 @@ const questions: Question[] = [
   },
   {
     id: '4',
-    text: "Your Perfect Study Space (Environment & Distraction Level)",
+    text: "Your Perfect Study Space",
     options: [
       { id: '4-1', text: "📚 A quiet library", value: "Focused Learner" },
       { id: '4-2', text: "🎵 A café with background noise", value: "Sensory Learner" },
@@ -47,7 +47,7 @@ const questions: Question[] = [
   },
   {
     id: '5',
-    text: "The Procrastination Test (Time Management)",
+    text: "The Procrastination Test",
     options: [
       { id: '5-1', text: "📅 Plan a schedule and start now", value: "Disciplined" },
       { id: '5-2', text: "🚀 Wait until later but still finish on time", value: "Needs Deadlines" },
@@ -56,7 +56,7 @@ const questions: Question[] = [
   },
   {
     id: '6',
-    text: "The Post-Study Reward (Motivation Type)",
+    text: "The Post-Study Reward",
     options: [
       { id: '6-1', text: "🏆 Reward myself with a break", value: "Extrinsically Motivated" },
       { id: '6-2', text: "📈 Reflect on what I learned", value: "Intrinsically Motivated" },
