@@ -1,0 +1,91 @@
+.splash-container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    overflow: hidden;
+    transition: transform 1.5s ease-in-out;
+}
+
+.animated-bg{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+
+.splash-container.zoom-out {
+    transform: scale(0.3) translateY(-50px);
+    opacity: 0;
+}
+
+.book-wrapper {
+    position: relative;
+    width: 30px;
+    height: 40px;
+    perspective: 1000px;
+    transform: translateX(-120px) translateY(-20px);
+}
+
+.book {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: bookAnimation 5s forwards;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    background: white;
+    /*opacity: 50%;*/
+    position: absolute;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #007BFF;
+    /*box-shadow: 0 2px 5px #9ACFFF;*/
+    transform-origin: left center;
+    animation: pageTurn 2s infinite alternate ease-in-out;
+}
+
+.page:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.page:nth-child(2) {
+    animation-delay: 0.6s;
+}
+
+.page:nth-child(3) {
+    animation-delay: 0.9s;
+}
+
+.splash-text {
+    position: absolute;
+    text-align: center;
+    color: #007BFF;
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 10;
+}
+
+/*@keyframes bookAnimation {*/
+/*    0% {*/
+/*        transform: rotateY(0deg);*/
+/*    }*/
+/*    100% {*/
+/*        transform: rotateY(10deg);*/
+/*    }*/
+/*}*/
+
+@keyframes pageTurn {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(-180deg);
+    }
+}
