@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 // model.js
 
 import { pipeline } from '@xenova/transformers';
@@ -70,4 +68,3 @@ Please update the course outline to include remedial lessons and extra quizzes w
     throw error;
   }
 }
->>>>>>> 0ed7983 (Fixing model call issues)
