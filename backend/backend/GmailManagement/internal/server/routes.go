@@ -3,17 +3,11 @@ package server
 import (
 	"GmailManagement/internal/auth"
 	"GmailManagement/internal/models"
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"time"
 
 	"github.com/gorilla/sessions"
-	"github.com/markbates/goth"
-
-	//"github.com/markbates/goth/providers/google"
-	"golang.org/x/oauth2"
-	"google.golang.org/api/gmail/v1"
 
 	//"github.com/gorilla/pat"
 	"net/http"
@@ -41,8 +35,25 @@ func (s *Server) RegisterRoutes() http.Handler {
 	})
 
 	assessmentHandler := s.assessment()
-	r.Handle("/assessment", assessmentHandler)
-	r.Handle("/assessment/", assessmentHandler)
+	r.Mount("/assessment", assessmentHandler)
+
+	courseHandler := s.courseHandler()
+	r.Mount("/course", courseHandler)
+
+	feedbackHandler := s.feedbackHandler()
+	r.Mount("/feedback", feedbackHandler)
+
+	lessonHandler := s.lessonHandler()
+	r.Mount("/lesson", lessonHandler)
+
+	riasec := s.riasecHandler()
+	r.Mount("/riasec", riasec)
+
+	topicHandler := s.topicHandler()
+	r.Mount("/topic", topicHandler)
+
+	userProgress := s.progressHandler()
+	r.Mount("/progress", userProgress)
 
 	//r.Use(RequestCorsMiddleware(r))
 	//r.UseProviders(auth.NewAuth())
@@ -95,31 +106,31 @@ func (s *Server) RegisterRoutes() http.Handler {
 
 	})
 
-	r.Get("/emails", func(w http.ResponseWriter, r *http.Request) {
-		provider := chi.URLParam(r, "provider")
-		q := r.URL.Query()
-		q.Add("provider", provider)
-		r.URL.RawQuery = q.Encode()
-		//gothic.StoreInSession("provider", provider, r, w)
-		gothic.GetContextWithProvider(r, provider)
-		if gothUser, err := gothic.CompleteUserAuth(w, r); err == nil {
-			fmt.Println(gothUser)
-			http.Redirect(w, r, "http://localhost:8080/home", http.StatusTemporaryRedirect)
-		}
-		gothic.BeginAuthHandler(w, r)
-	})
-
-	// r.Get("/auth/{provider}", s.)
-
-	// r.GET("/auth/:provider", func(c *gin.Context) {
-	// 	provider := c.Param("provider")
-	// 	if provider == "" {
-	// 		c.JSON(http.StatusBadRequest, gin.H{"error": "Provider is required"})
-	// 		return
-	// 	}
-
-	// 	gothic.BeginAuthHandler(c.Writer, c.Request)
-	// })
+	//r.Get("/emails", func(w http.ResponseWriter, r *http.Request) {
+	//	provider := chi.URLParam(r, "provider")
+	//	q := r.URL.Query()
+	//	q.Add("provider", provider)
+	//	r.URL.RawQuery = q.Encode()
+	//	//gothic.StoreInSession("provider", provider, r, w)
+	//	gothic.GetContextWithProvider(r, provider)
+	//	if gothUser, err := gothic.CompleteUserAuth(w, r); err == nil {
+	//		fmt.Println(gothUser)
+	//		http.Redirect(w, r, "http://localhost:8080/home", http.StatusTemporaryRedirect)
+	//	}
+	//	gothic.BeginAuthHandler(w, r)
+	//})
+	//
+	//// r.Get("/auth/{provider}", s.)
+	//
+	//// r.GET("/auth/:provider", func(c *gin.Context) {
+	//// 	provider := c.Param("provider")
+	//// 	if provider == "" {
+	//// 		c.JSON(http.StatusBadRequest, gin.H{"error": "Provider is required"})
+	//// 		return
+	//// 	}
+	//
+	//// 	gothic.BeginAuthHandler(c.Writer, c.Request)
+	//// })
 
 	r.Get("/logout", func(w http.ResponseWriter, r *http.Request) {
 		// enableCORS(w, r)
@@ -136,9 +147,9 @@ func (s *Server) RegisterRoutes() http.Handler {
 		json.NewEncoder(w).Encode(msg)
 	})
 
-	r.Get("/getemails", func(w http.ResponseWriter, r *http.Request) {
-		// enableCORS(w, r)
-	})
+	//r.Get("/getemails", func(w http.ResponseWriter, r *http.Request) {
+	//	// enableCORS(w, r)
+	//})
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Received request to /") // Add debug logging
@@ -240,49 +251,49 @@ func (s *Server) CallbackHandler(w http.ResponseWriter, r *http.Request) {
 	//sessions.NewSession(store, "jwt")
 }
 
-func getEmailService(accessToken string) (*gmail.Service, error) {
-	client := &http.Client{}
-	client.Transport = &oauth2.Transport{Source: oauth2.StaticTokenSource(&oauth2.Token{AccessToken: accessToken}),
-		Base: http.DefaultTransport}
-	srv, err := gmail.New(client)
-	if err != nil {
-		return nil, err
-	}
-	return srv, nil
-}
-
-func getEmails(user *goth.User) ([]string, error) {
-	srv, err := getEmailService(user.AccessToken)
-	if err != nil {
-		return nil, err
-	}
-	userId := "me"
-	r, err := srv.Users.Messages.List(userId).Do()
-	if err != nil {
-		return nil, err
-	}
-	var s []string
-	for _, msg := range r.Messages {
-		email, err := GetEmail(srv, msg.Id)
-		if err != nil {
-			return nil, err
-		}
-		s = append(s, email)
-	}
-	return s, nil
-}
-
-func GetEmail(srv *gmail.Service, id string) (string, error) {
-	gmailMessageId, err := srv.Users.Messages.Get("me", id).Format("RAW").Do()
-	if err != nil {
-		return "", err
-	}
-	if gmailMessageId != nil {
-		decodedEmail, err := base64.RawURLEncoding.DecodeString(gmailMessageId.Raw)
-		if err != nil {
-			fmt.Println(err)
-		}
-		return string(decodedEmail), nil
-	}
-	return "", err
-}
+//func getEmailService(accessToken string) (*gmail.Service, error) {
+//	client := &http.Client{}
+//	client.Transport = &oauth2.Transport{Source: oauth2.StaticTokenSource(&oauth2.Token{AccessToken: accessToken}),
+//		Base: http.DefaultTransport}
+//	srv, err := gmail.New(client)
+//	if err != nil {
+//		return nil, err
+//	}
+//	return srv, nil
+//}
+//
+//func getEmails(user *goth.User) ([]string, error) {
+//	srv, err := getEmailService(user.AccessToken)
+//	if err != nil {
+//		return nil, err
+//	}
+//	userId := "me"
+//	r, err := srv.Users.Messages.List(userId).Do()
+//	if err != nil {
+//		return nil, err
+//	}
+//	var s []string
+//	for _, msg := range r.Messages {
+//		email, err := GetEmail(srv, msg.Id)
+//		if err != nil {
+//			return nil, err
+//		}
+//		s = append(s, email)
+//	}
+//	return s, nil
+//}
+//
+//func GetEmail(srv *gmail.Service, id string) (string, error) {
+//	gmailMessageId, err := srv.Users.Messages.Get("me", id).Format("RAW").Do()
+//	if err != nil {
+//		return "", err
+//	}
+//	if gmailMessageId != nil {
+//		decodedEmail, err := base64.RawURLEncoding.DecodeString(gmailMessageId.Raw)
+//		if err != nil {
+//			fmt.Println(err)
+//		}
+//		return string(decodedEmail), nil
+//	}
+//	return "", err
+//}
