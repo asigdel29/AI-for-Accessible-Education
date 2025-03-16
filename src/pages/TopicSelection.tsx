@@ -5,6 +5,7 @@ import AnimatedContainer from '../components/AnimatedContainer';
 import SearchInput from '../components/SearchInput';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
+import Badge from "@/components/Badges.tsx";
 
 const suggestedTopics = [
   'Machine Learning Basics',
@@ -41,10 +42,6 @@ const TopicSelection = () => {
     }
     localStorage.setItem('selectedTopic', topic);
     navigate('/personality-test');
-  };
-
-  const handleSelectSuggestion = (suggestion) => {
-    setTopic(suggestion);
   };
 
   const callAIModel = async (conversation) => {
