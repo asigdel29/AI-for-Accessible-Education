@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BookOpen, Brain, Sparkles } from 'lucide-react';
 import AnimatedContainer from '../components/AnimatedContainer';
 import { motion } from 'framer-motion';
+import { Analytics } from "@vercel/analytics/react"
 
 const CourseGeneration = () => {
   const navigate = useNavigate();
