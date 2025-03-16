@@ -5,8 +5,8 @@
     align-items: center;
     justify-content: center;
     background: white;
-    overflow: hidden;
-    transition: transform 1.5s ease-in-out;
+    /*overflow: hidden;*/
+    /*transition: transform 1.5s ease-in-out;*/
 }
 
 .animated-bg{
@@ -16,17 +16,23 @@
 }
 
 
-.splash-container.zoom-out {
-    transform: scale(0.3) translateY(-50px);
-    opacity: 0;
-}
+
+/*.splash-container.zoom-out {*/
+/*    transform: scale(0.3) translateY(-50px);*/
+/*    opacity: 0;*/
+/*}*/
 
 .book-wrapper {
-    position: relative;
-    width: 30px;
-    height: 40px;
+    position: absolute;
+    width: 40px;
+    height: 50px;
+    /*bottom: 60vh;*/
+    /*left: 47vw;*/
+    left: 62%;
+    top: 20%;
+    /*height: 20px;*/
     perspective: 1000px;
-    transform: translateX(-120px) translateY(-20px);
+    transform: translateX(-100px) translateY(-20px);
 }
 
 .book {
@@ -34,7 +40,7 @@
     height: 100%;
     position: absolute;
     transform-style: preserve-3d;
-    animation: bookAnimation 5s forwards;
+    animation: bookAnimation 3s alternate forwards;
 }
 
 .page {
@@ -48,7 +54,7 @@
     border-color: #007BFF;
     /*box-shadow: 0 2px 5px #9ACFFF;*/
     transform-origin: left center;
-    animation: pageTurn 2s infinite alternate ease-in-out;
+    animation: pageTurn 2s ease-in-out;
 }
 
 .page:nth-child(1) {
@@ -72,14 +78,14 @@
     z-index: 10;
 }
 
-/*@keyframes bookAnimation {*/
-/*    0% {*/
-/*        transform: rotateY(0deg);*/
-/*    }*/
-/*    100% {*/
-/*        transform: rotateY(10deg);*/
-/*    }*/
-/*}*/
+@keyframes bookAnimation {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(10deg);
+    }
+}
 
 @keyframes pageTurn {
     0% {
@@ -88,4 +94,69 @@
     100% {
         transform: rotateY(-180deg);
     }
+}
+
+
+.animateball {
+    position: absolute;
+    animation-name: animateBall;
+    animation-duration: 2s;
+    /*bottom: 60vh;*/
+    /*left: 60vw;*/
+    background: linear-gradient(to bottom, #008A63, #9acfff, #007BFF);
+    animation-delay: 0.2s;
+    width: 100vw;
+    height: 100vh;
+    /*opacity: 0.2;*/
+    /*align-content: center;*/
+    /*justify-content: center;*/
+    /*width: 30px;*/
+    /*height: 40px;*/
+    /*background-color: #007BFF;*/
+    /*animation-delay: 1s;*/
+    /*animation: ease;*/
+    /*width: 100vw;*/
+    /*height: 100vh;*/
+    /*background-color: #007BFF;*/
+}
+
+@keyframes animateBall {
+    0% {
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(to bottom, #008A63, #007BFF);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    50% {
+        animation: ease-in-out;
+        /*animation-delay: 1s;*/
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        bottom: 0;
+        left: 0;
+        opacity: 1;
+        position: absolute;
+        background: linear-gradient(to bottom, #008A63, #007BFF);
+    }
+    100% {
+        bottom: 45vh;
+        left: 45vw;
+        opacity: 0;
+        /*align-content: center;*/
+        /*justify-content: center;*/
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background-color: white;
+    }
+}
+
+.text-color{
+    background: linear-gradient(to bottom, #008A63, #00A0BB, #007BFF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
