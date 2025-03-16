@@ -35,7 +35,7 @@ This project is an **adaptive learning platform** that personalizes courses base
 
 ## AI Integration
 
-The AI model is **locally hosted** and trained on the following datasets:
+The AI model, **Meta-Llama-3.1-8B-bnb-4bit**, is **locally hosted** and trained on the following datasets:
 
 - **LectureBank**: A corpus for NLP Education and Prerequisite Chain Learning.
 - **Open University Learning Analytics Dataset (OULAD)**: Provides valuable insights into learning patterns and user engagement.
