@@ -11,7 +11,7 @@ import (
 	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
 
-	//"GmailManagement/internal/auth"
+	"GmailManagement/internal/auth"
 	"GmailManagement/internal/database"
 )
 
@@ -53,7 +53,7 @@ func NewServer() *http.Server {
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 30 * time.Second,
 	}
-	//auth.NewAuth()
+	auth.NewAuth()
 
 	return server
 }
