@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
 import ProgressBar from '../components/ProgressBar';
-import QuestionCard, { Question } from '../components/QuestionCard';
+import QuestionCard, { Question, Option } from '../components/QuestionCard';
 import AnimatedContainer from '../components/AnimatedContainer';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
