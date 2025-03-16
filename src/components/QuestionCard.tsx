@@ -1,18 +1,19 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 
 export interface Option {
   id: string;
   text: string;
+  value: string; 
 }
 
 export interface Question {
   id: string;
   text: string;
   options: Option[];
-  category: 'R' | 'A' | 'I' | 'S' | 'E' | 'C';
+  category?: string; 
 }
+
 
 interface QuestionCardProps {
   question: Question;
@@ -23,7 +24,7 @@ interface QuestionCardProps {
 const QuestionCard: React.FC<QuestionCardProps> = ({
   question,
   selectedOption,
-  onSelectOption
+  onSelectOption,
 }) => {
   const getCategoryName = (category: string) => {
     switch (category) {
