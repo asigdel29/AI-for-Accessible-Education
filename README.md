@@ -1,60 +1,54 @@
-#  AI for Accessible Education  
+# AI for Accessible Education
 
-##  Overview  
-This project is an **adaptive learning platform** that personalizes courses based on the user’s learning preferences and personality traits. The system utilizes the **RAISEC personality test** to generate customized lesson plans, quizzes, and assessments. As users progress, the course dynamically adjusts to their performance, ensuring an optimized learning experience.  
-
----
-
-##  Key Features  
- **Topic Selection** – Users enter a specific topic they want to learn.  
- **RAISEC Personality Test** – Determines the user’s learning style.  
- **Personalized Course Generation** – Creates lesson plans, quizzes, and assessments tailored to the user’s personality.  
- **Adaptive Learning System** – Modifies course structure based on assessment results.  
- **Feedback & Progress Tracking** – Users can track progress and provide feedback upon course completion.  
+This project is an **adaptive learning platform** that personalizes courses based on the user’s learning preferences and personality traits. Using the **RAISEC personality test**, the system generates customized lesson plans, quizzes, and assessments, adjusting dynamically as users progress.
 
 ---
 
-##  User Flow  
-1️ **Enter Learning Topic** → Users specify a subject they want to learn.  
-2️ **Complete RAISEC Test** → A short test assesses personality-based learning preferences.  
-3️ **Generate Personalized Course** → The platform creates a custom lesson plan with quizzes & assessments.  
-4️ **Dynamic Course Adjustments** → The course adapts based on user performance in quizzes.  
-5️ **Completion & Feedback** → Users receive a certificate and are prompted for feedback.  
+## Key Features  
+- **Topic Selection**: Users specify a subject to learn.  
+- **RAISEC Personality Test**: Determines learning style.  
+- **Personalized Course Generation**: Tailored lesson plans, quizzes, and assessments.  
+- **Adaptive Learning**: Course structure adjusts based on user performance.  
+- **Feedback & Progress Tracking**: Users track progress and provide feedback.
 
 ---
 
-## 🛠 Technology Stack  
-**Frontend**:  (React.js, TailwindCSS)  
-**Backend**: Node.js / Express.js (for handling user data and course personalization)  
-**Database**: PostgreSQL / MongoDB (to store user progress, test results, and course content)  
-**AI Integration**: DeepSeekR1 Reasoning model to improve adaptation accuracy  
+## User Flow  
+1. **Enter Topic**: Users specify a subject.  
+2. **Complete RAISEC Test**: Assesses learning preferences.  
+3. **Generate Course**: Custom lesson plan is created.  
+4. **Adaptive Learning**: Course adapts based on quiz results.  
+5. **Completion & Feedback**: Certificate issued, and feedback collected.
 
 ---
 
-##  Future Enhancements  
-🔹 **AI-based learning insights & recommendations**  
-🔹 **Gamification elements** (badges, streaks, leaderboards)  
-
-##  Contributing  
-
-Contributors are more than welcome to improve the project by creating a new issue to **report bugs, suggest new features, or make changes** to the source code by submitting a **pull request (PR)**.  
-
-To have your work merged in, please ensure the following:  
-
-###  Contribution Process  
-1. **Fork the Repository** (if you are not a contributor) and create your branch from `master`.  
-   - If you are already a contributor, create a new **development branch** with a relevant name.  
-2. **Push your commits** to the aforementioned fork/branch.  
-3. **Keep changes within scope** – Avoid committing irrelevant changes that are unrelated to the PR.  
-4. **Create a Pull Request (PR)** in the main repository.  
-5. **Describe Your Changes** – If you've fixed a bug or added a new feature, provide a **clear and comprehensive list of changes** in your PR description.  
-6. **Ensure Code Quality** – Make sure your code is:  
-   - **Tested** and fully functional.  
-   - **Linted** and follows clean coding practices.  
-7. **Merging into Master** – When merging into `master`, it is highly recommended to use **"Squash and Merge"** instead of "Create a Merge Commit" to prevent cluttering the commit history.  
+##  Technology Stack  
+- **Frontend**: React.js, TailwindCSS  
+- **Backend**: GoLang  
+- **Database**: MongoDB  
+- **AI Integration**: Llama Reasoning Model, trained using a dataset derived from various educational and psychological assessments.  #Pending
 
 ---
 
-This project is licensed under the MIT License.
+## Future Enhancements  
+- **AI-based recommendations**  
+- **Gamification** (badges, leaderboards)
 
+---
 
+## Contributing  
+Feel free to contribute by reporting bugs, suggesting features, or submitting pull requests. Please follow the **Standard contribution process**.
+
+---
+
+This project was created during the **Devpost MEGA Hackathon (48 hours)** as part of our team submission.  
+
+**Team Members**:  
+- Anubhav Sigdel  
+- Sakshyam Sarki  
+- Ayusha Bhandari  
+- Shrishtika Bajracharya  
+
+---
+
+Licensed under the MIT License.
