@@ -30,7 +30,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 	// Add logging middleware
 	r.Use(func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
+			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080")
 			w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 			w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding")
 			w.Header().Set("Access-Control-Allow-Credentials", "true")
@@ -115,7 +115,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 		}
 		fmt.Println(cookie)
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(cookie.Values["user"].(string)))
+		w.Write([]byte("logged in"))
 	})
 
 	return r
@@ -192,4 +192,20 @@ func createToken(username string) (string, error) {
 	}
 
 	return tokenString, nil
+}
+
+func verifyToken(tokenString string) error {
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		return os.Getenv("UID_SECRET"), nil
+	})
+
+	if err != nil {
+		return err
+	}
+
+	if !token.Valid {
+		return fmt.Errorf("invalid token")
+	}
+
+	return nil
 }
