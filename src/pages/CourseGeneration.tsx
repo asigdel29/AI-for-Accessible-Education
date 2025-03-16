@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Brain, Sparkles } from 'lucide-react';
 import AnimatedContainer from '../components/AnimatedContainer';
 import { motion } from 'framer-motion';
-import { generateCourse, adaptCourse } from '../model.js';
+import { generateCourse, adaptCourse } from '../model';
 
 const CourseGeneration = () => {
   const navigate = useNavigate();
@@ -32,10 +32,6 @@ Output:
       setCourseOutline(generatedText);
       localStorage.setItem('courseModules', JSON.stringify(generatedText));
       setLoading(false);
-      // Navigate to dashboard after a short delay.
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 2000);
     } catch (error) {
       console.error('Error generating course:', error);
       // Fallback if generation fails.
@@ -47,12 +43,9 @@ Output:
       ];
       localStorage.setItem('courseModules', JSON.stringify(modules));
       setLoading(false);
-      setTimeout(() => { navigate('/dashboard'); }, 2000);
     }
   };
 
-  // Example function to adapt the course outline.
-  // You could trigger this after receiving assessment feedback.
   const handleAdaptCourse = async () => {
     const assessmentFeedback = { remedial_needed: true, quiz_score: 65 };
     try {
@@ -70,7 +63,6 @@ Output:
       navigate('/');
       return;
     }
-    // Simulate progress/loading before generating the course.
     const interval = setInterval(() => {
       setProgress(prev => {
         const newProgress = prev + 1;
@@ -133,17 +125,21 @@ Output:
               <pre className="text-left text-sm whitespace-pre-wrap">{prompt}</pre>
             </div>
             {/* Optionally, a button to manually trigger course adaptation */}
-            <button
+            {/* <button
               onClick={handleAdaptCourse}
               className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             >
               Adapt Course Based on Feedback
-            </button>
+            </button> */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="mt-8">
-              <p className="text-sm text-muted-foreground mb-4">Redirecting you to your dashboard...</p>
-              <div className="h-1 bg-muted rounded-full max-w-xs mx-auto overflow-hidden">
-                <motion.div initial={{ width: '0%' }} animate={{ width: '100%', transition: { duration: 2 } }} className="h-full bg-primary rounded-full" />
-              </div>
+              <p className="text-sm text-muted-foreground mb-4">When you're ready, navigate to your dashboard.</p>
+              {/* Button to navigate manually to the dashboard */}
+              <button
+                onClick={() => navigate('/dashboard')}
+                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              >
+                Go to Dashboard
+              </button>
             </motion.div>
           </motion.div>
         )}

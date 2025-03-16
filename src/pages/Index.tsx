@@ -6,7 +6,6 @@ const Index = () => {
   const navigate = useNavigate();
   
   useEffect(() => {
-    // Redirect to the topic selection page, which is the start of our application flow
     navigate('/');
   }, [navigate]);
 
