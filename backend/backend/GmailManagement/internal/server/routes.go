@@ -3,8 +3,12 @@ package server
 import (
 	"GmailManagement/internal/auth"
 	"GmailManagement/internal/models"
+	"crypto/rand"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/golang-jwt/jwt/v5"
+	"os"
 	"time"
 
 	"github.com/gorilla/sessions"
@@ -26,7 +30,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 	// Add logging middleware
 	r.Use(func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
+			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080")
 			w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 			w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding")
 			w.Header().Set("Access-Control-Allow-Credentials", "true")
@@ -111,7 +115,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 		}
 		fmt.Println(cookie)
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(cookie.Values["user"].(string)))
+		w.Write([]byte("logged in"))
 	})
 
 	return r
@@ -141,13 +145,67 @@ func (s *Server) CallbackHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	u := models.User{ID: user.UserID, GoogleID: user.UserID, Email: user.Email, Name: user.Name, FamilyName: user.LastName, ProfilePicture: user.AvatarURL, AccessToken: user.AccessToken, RefreshToken: user.RefreshToken, TokenExpiry: user.ExpiresAt, CreatedAt: time.Now(), UpdatedAt: time.Now()}
+
+	//generate session id
+	sessionid, err := generateSessionid()
+	if err != nil {
+		http.Error(w, "Failed to generate session ID: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	u := models.User{ID: sessionid, GoogleID: user.UserID, Email: user.Email, Name: user.Name, FamilyName: user.LastName, ProfilePicture: user.AvatarURL, AccessToken: user.AccessToken, RefreshToken: user.RefreshToken, TokenExpiry: user.ExpiresAt, CreatedAt: time.Now(), UpdatedAt: time.Now()}
+	err = s.db.SetUser(&u)
+	if err != nil {
+		return
+	}
+	jwtstring, err := createToken(sessionid)
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	//create a cookie sessionls
 	session, _ := auth.Store.Get(r, "session")
-	session.Values["user"] = u.ID // need to set path to the frontend
+	session.Values["sessionId"] = jwtstring // need to set path to the frontend
 	if err := session.Save(r, w); err != nil {
 		fmt.Println("Error saving session:", err)
 	}
 	http.Redirect(w, r, "http://localhost:8000/", http.StatusFound)
+}
+
+func generateSessionid() (string, error) {
+	b := make([]byte, 32)
+	_, err := rand.Read(b)
+	if err != nil {
+		return "", err
+	}
+	return base64.URLEncoding.EncodeToString(b), nil
+}
+
+func createToken(username string) (string, error) {
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256,
+		jwt.MapClaims{
+			"sessionId": username,
+			"exp":       time.Now().Add(time.Hour * 24).Unix(),
+		})
+	tokenString, err := token.SignedString(os.Getenv("UID_SECRET"))
+	if err != nil {
+		return "", err
+	}
+
+	return tokenString, nil
+}
+
+func verifyToken(tokenString string) error {
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		return os.Getenv("UID_SECRET"), nil
+	})
+
+	if err != nil {
+		return err
+	}
+
+	if !token.Valid {
+		return fmt.Errorf("invalid token")
+	}
+
+	return nil
 }
