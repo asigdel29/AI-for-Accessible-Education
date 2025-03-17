@@ -81,7 +81,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 	})
 
 	r.Get("/logout", func(w http.ResponseWriter, r *http.Request) {
-		// enableCORS(w, r)
+		enableCORS(w, r)
 		session, _ := auth.Store.Get(r, "session")
 		session.Values["user"] = "" // need to set path to the frontend
 		if err := session.Save(r, w); err != nil {
@@ -101,8 +101,8 @@ func (s *Server) RegisterRoutes() http.Handler {
 		w.Write([]byte("hello world"))
 	})
 
-	r.Get("/whoamI", func(w http.ResponseWriter, r *http.Request) {
-		// enableCORS(w, r)
+	r.Get("/whoami", func(w http.ResponseWriter, r *http.Request) {
+		enableCORS(w, r)
 		cookie, err := auth.Store.Get(r, "session")
 		if err != nil {
 			if err == http.ErrNoCookie {
@@ -125,12 +125,12 @@ func (s *Server) healthHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-// func enableCORS(w http.ResponseWriter, r *http.Request) {
-// 	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:8081") // Allow frontend
-// 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-// 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-// 	w.Header().Set("Access-Control-Allow-Credentials", "true") // Allow cookies & sessions
-// }
+func enableCORS(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080") // Allow frontend
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+	w.Header().Set("Access-Control-Allow-Credentials", "true") // Allow cookies & sessions
+}
 
 func (s *Server) CallbackHandler(w http.ResponseWriter, r *http.Request) {
 	provider := chi.URLParam(r, "provider")
@@ -168,6 +168,7 @@ func (s *Server) CallbackHandler(w http.ResponseWriter, r *http.Request) {
 	if err := session.Save(r, w); err != nil {
 		fmt.Println("Error saving session:", err)
 	}
+	//w.Write([]byte(u.ProfilePicture))
 	http.Redirect(w, r, "http://localhost:8080", http.StatusFound)
 }
 

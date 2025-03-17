@@ -12,7 +12,8 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ isLoggedIn, setIsLoggedIn, children }) => {
     const location = useLocation();
-    const [user, setUser] = useState<{ name?: string; email?: string } | null>(null);
+    // const [user, setUser] = useState<{ name?: string; email?: string } | null>(null);
+    const [user, setUser] = useState(null);
     const [showLogin, setShowLogin] = useState(false); // <-- Added for modal control
     const [showDropdown, setShowDropdown] = useState(false);
 
@@ -21,8 +22,9 @@ const Layout: React.FC<LayoutProps> = ({ isLoggedIn, setIsLoggedIn, children }) 
         fetch("http://localhost:8000/whoami", { credentials: "include" })
             .then((res) => res.text())
             .then((data) => {
+                console.log(data)
                 if (data==="logged in") {
-                    // setUser(data);
+                    setUser(" ");
                     setIsLoggedIn(true);
                 }
             })
@@ -31,8 +33,18 @@ const Layout: React.FC<LayoutProps> = ({ isLoggedIn, setIsLoggedIn, children }) 
             });
     }, [setIsLoggedIn]);
 
+    // useEffect(() => {
+    //     const params = new URLSearchParams(window.location.search);
+    //     const profile = params.get("profile");
+    //     if (profile) {
+    //         setUser(profile);
+    //         console.log(profile)
+    //         // localStorage.setItem("profilePicture", profile); // Store for later use
+    //     }
+    // }, []);
+
     const handleLogout = () => {
-        fetch("http://localhost:8000/users/auth/logout", { method: "POST", credentials: "include" })
+        fetch("http://localhost:8000/logout", { method: "GET", credentials: "include" })
             .then(() => {
                 setUser(null);
                 setIsLoggedIn(false);
@@ -61,7 +73,7 @@ const Layout: React.FC<LayoutProps> = ({ isLoggedIn, setIsLoggedIn, children }) 
                                     className="flex items-center space-x-2 focus:outline-none"
                                 >
                                     <FaUserCircle size={24} className="text-green-700" />
-                                    <span className="text-sm font-medium">{user.name || "Profile"}</span>
+                                    <span className="text-sm font-medium">{user || "Profile"}</span>
                                 </button>
 
                                 {showDropdown && (
