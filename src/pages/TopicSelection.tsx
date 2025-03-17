@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BookOpen, ArrowRight, MessageSquare, Send, X } from 'lucide-react';
 import AnimatedContainer from '../components/AnimatedContainer';
@@ -8,8 +9,9 @@ import { toast } from 'sonner';
 import Badge from "@/components/Badges.tsx";
 import Popup from "@/components/Popup.tsx";
 
+
 const suggestedTopics = [
-  'Machine Learning Basics',
+  'Natural Language Processing',
   'Web Development',
   'Data Science Fundamentals',
   'JavaScript Frameworks',
@@ -20,6 +22,7 @@ const suggestedTopics = [
   'Digital Marketing',
   'Blockchain Technology'
 ];
+
 
 const TopicSelection = () => {
   const navigate = useNavigate();
@@ -48,7 +51,8 @@ const TopicSelection = () => {
 }, [popupTriggered]);
 
 
-  // Original search handling
+
+// Original search handling
   const handleSearch = (value) => {
     setTopic(value);
   };
