@@ -45,7 +45,7 @@ The following tasks were performed to enhance the model
 - **Fine-Tuning the Model**: Refining the model's abilities by adjusting it for specific tasks or domains.
 - **Implementing Dynamic Course Adaptation**: Using assessment feedback to adjust course material in real time, ensuring a personalized and adaptive learning experience.
 
-*[Google Colab link for training mode](https://colab.research.google.com/drive/1dbOKwKIJGd1OANHxSr6IiORZ459Ju__5?usp=sharing)*
+*[Google Colab link for training notebook](https://colab.research.google.com/drive/1dbOKwKIJGd1OANHxSr6IiORZ459Ju__5?usp=sharing)*
 
 The model is currently optimized for **Natural Language Processing (NLP)** and **Chain Learning**. To enhance its course generation, additional datasets are required. The next steps for the model include:
 
