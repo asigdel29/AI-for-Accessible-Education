@@ -6,6 +6,7 @@ import AnimatedContainer from '../components/AnimatedContainer';
 import Confetti from '../components/Confetti';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
+import Badges from "@/components/Badges.tsx";
 
 const CourseComplete = () => {
   const navigate = useNavigate();
@@ -54,8 +55,7 @@ const CourseComplete = () => {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-12 px-4">
-      <Confetti />
-      
+
       <AnimatedContainer className="w-full max-w-3xl mx-auto text-center">
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }}
@@ -65,12 +65,15 @@ const CourseComplete = () => {
         >
           <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
             <Award size={48} className="text-primary" />
+
           </div>
         </motion.div>
         
         <h1 className="text-3xl md:text-4xl font-bold mb-3">Congratulations!</h1>
+
         <p className="text-xl md:text-2xl text-muted-foreground mb-8">
           You've completed your personalized course on <span className="font-semibold text-foreground">{selectedTopic}</span>
+        <Badges/>
         </p>
         
         {!submitted ? (
