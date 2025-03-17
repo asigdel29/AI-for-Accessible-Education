@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BookOpen, ArrowRight, MessageSquare, Send, X } from 'lucide-react';
@@ -5,7 +6,9 @@ import AnimatedContainer from '../components/AnimatedContainer';
 import SearchInput from '../components/SearchInput';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
-import Popup from '../components/Popup';
+import Badge from "@/components/Badges.tsx";
+import Popup from "@/components/Popup.tsx";
+
 
 const suggestedTopics = [
   'Natural Language Processing',
@@ -46,6 +49,7 @@ const TopicSelection = () => {
     return () => clearTimeout(timeout);
   }
 }, [popupTriggered]);
+
 
 
 // Original search handling

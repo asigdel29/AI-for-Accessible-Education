@@ -40,3 +40,97 @@
 .read-the-docs {
   color: #888;
 }
+
+.course-generation-container {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  background-color: #f9f9f9;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #4a4a4a;
+  margin-bottom: 1.5rem;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #2563eb;
+}
+
+.icon-container {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1rem;
+  color: #2563eb;
+}
+
+.progress-bar-container {
+  width: 100%;
+  max-width: 400px;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #2563eb;
+  transition: width 0.5s ease-in-out;
+}
+
+.course-output-box {
+  background-color: #f3f3f3;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  text-align: left;
+  overflow-wrap: break-word;
+}
+
+.course-text {
+  font-size: 0.9rem;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+.button-container {
+  margin-top: 1.5rem;
+}
+
+.instruction-text {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #22c55e;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dashboard-button:hover {
+  background-color: #16a34a;
+}
+
+.stage-text {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
