@@ -75,7 +75,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 		gothic.GetContextWithProvider(r, provider)
 		if gothUser, err := gothic.CompleteUserAuth(w, r); err == nil {
 			fmt.Println(gothUser)
-			http.Redirect(w, r, "http://localhost:8080/home", http.StatusTemporaryRedirect)
+			http.Redirect(w, r, "http://localhost:8000/auth/google", http.StatusTemporaryRedirect)
 		}
 		gothic.BeginAuthHandler(w, r)
 	})
@@ -168,7 +168,7 @@ func (s *Server) CallbackHandler(w http.ResponseWriter, r *http.Request) {
 	if err := session.Save(r, w); err != nil {
 		fmt.Println("Error saving session:", err)
 	}
-	http.Redirect(w, r, "http://localhost:8000/", http.StatusFound)
+	http.Redirect(w, r, "http://localhost:8080", http.StatusFound)
 }
 
 func generateSessionid() (string, error) {
@@ -186,7 +186,7 @@ func createToken(username string) (string, error) {
 			"sessionId": username,
 			"exp":       time.Now().Add(time.Hour * 24).Unix(),
 		})
-	tokenString, err := token.SignedString(os.Getenv("UID_SECRET"))
+	tokenString, err := token.SignedString([]byte(os.Getenv("UID_SECRET")))
 	if err != nil {
 		return "", err
 	}
