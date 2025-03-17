@@ -135,10 +135,10 @@ Output:
               <p className="text-sm text-muted-foreground mb-4">When you're ready, navigate to your dashboard.</p>
               {/* Button to navigate manually to the dashboard */}
               <button
-                onClick={() => navigate('/dashboard')}
+                  onClick={() => navigate('/nlp-quiz')}
                 className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
               >
-                Go to Dashboard
+                Continue to NLP Quiz
               </button>
             </motion.div>
           </motion.div>

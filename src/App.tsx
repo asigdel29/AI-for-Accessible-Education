@@ -18,6 +18,8 @@ import Privacy from "./pages/Privacy";
 import Contact from "./pages/Contact";
 import Help from "./pages/Help";
 import Index from "./pages/Index";
+import NLPQuiz from './pages/NLPQuiz';
+
 
 const queryClient = new QueryClient();
 
@@ -50,6 +52,7 @@ const App = () => {
                 <Route path="/" element={<TopicSelection />} />
                 <Route path="/index" element={<Index />} />
                 <Route path="/personality-test" element={<PersonalityTest />} />
+                <Route path="/nlp-quiz" element={<NLPQuiz />} />
                 <Route path="/course-generation" element={<CourseGeneration />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/module/:moduleId" element={<ModulePage />} />
