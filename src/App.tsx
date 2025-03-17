@@ -26,11 +26,16 @@ const App = () => {
     return !sessionStorage.getItem("hasSeenSplash");
   });
 
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
   useEffect(() => {
     if (showSplash) {
       sessionStorage.setItem("hasSeenSplash", "true");
     }
   }, [showSplash]);
+
+   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return showSplash ? (
       <SplashScreen onComplete={() => setShowSplash(false)} />
@@ -40,7 +45,7 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Layout>
+            <Layout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
               <Routes>
                 <Route path="/" element={<TopicSelection />} />
                 <Route path="/index" element={<Index />} />
@@ -60,6 +65,7 @@ const App = () => {
         </TooltipProvider>
       </QueryClientProvider>
   );
+
 };
 
 export default App;
